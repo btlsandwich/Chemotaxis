@@ -1,13 +1,14 @@
- //declare bacteria variables here   
- void setup()   
- {     
- 	//initialize bacteria variables here   
- }   
- void draw()   
+Bacteria[] jezebel; 
+void setup()   
  {    
- 	//move and show the bacteria   
+   size(500,500);
+   for(int i=0; i < 
+ }   
+void draw()   
+ {    
+ 	background(0);   
  }  
- class Bacteria    
+class Bacteria    
  {     
  	//lots of java!   
  }    
