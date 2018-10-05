@@ -12,21 +12,18 @@ void setup()
 void draw()   
  {    
   bg();
- 	fill(0,20);
+ 	fill(0,10);
   rect(0,0,width,height);
   for (int i=0; i < Bardiel.length; i++)
   {
       Bardiel[i].walk();
       Bardiel[i].show();
   }
- }  
-void keyPressed()
-{
-  redraw();
-}  
+}
 class Bacteria    
  {     
    int myX, myY, myC, b1, b2;
+   boolean click; 
    Bacteria()
    {
      myX = (int)(Math.random()*500);
@@ -34,9 +31,16 @@ class Bacteria
      myC = color(0,0,137,220);
      b1 = 1;
      b2 = 3;
+     click = true; 
+   }
+   void mouseClicked()
+   {
+     click = false;
    }
    void walk()
    {
+     if (click == true)
+     {
      if (mouseX > myX)
        myX = myX + (int)(Math.random()*5)-b1;
      else
@@ -45,11 +49,18 @@ class Bacteria
        myY = myY + (int)(Math.random()*5)-b1;
      else
        myY = myY + (int)(Math.random()*5)-b2;
-       
-     if (mousePressed)
-      {
-       myX = myX + (int)(Math.random()*5)-b2;
-      }
+     } 
+     else
+     {
+        if (mouseX > myX)
+           myX = myX + (int)(Math.random()*5)-b2;
+        else
+           myX = myX + (int)(Math.random()*5)-b1;
+        if (mouseY > myY)
+           myY = myY + (int)(Math.random()*5)-b2;
+        else
+           myY = myY + (int)(Math.random()*5)-b1;
+     }
    }
    void show()
    {
@@ -57,7 +68,7 @@ class Bacteria
      fill(myC);
      ellipse(myX, myY, 10,10);
    }
- }    
+}    
 void bg()
 {
   fill(100); 
@@ -67,4 +78,6 @@ void bg()
   {
     rect(z,470,50,10);
   }
+  fill(100);
+  rect(0,300,50,150);
 }
