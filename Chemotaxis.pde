@@ -1,8 +1,11 @@
 Bacteria[] Bardiel; 
 //PImage img = "";
+int b1, b2;
 void setup()   
  {    
-   size(500,500);
+   size(400,400);
+   b1 = (int)(Math.random()*400);
+   b2 = (int)(Math.random()*400);
    Bardiel = new Bacteria[100];
    for(int i = 0; i < 100; i++)
    {
@@ -11,7 +14,6 @@ void setup()
  }   
 void draw()   
  {    
-  bg();
  	fill(0,10);
   rect(0,0,width,height);
   for (int i=0; i < Bardiel.length; i++)
@@ -22,62 +24,43 @@ void draw()
 }
 class Bacteria    
  {     
-   int myX, myY, myC, b1, b2;
-   boolean click; 
+   int myX, myY, myC1, myC2, myC3;
    Bacteria()
    {
-     myX = (int)(Math.random()*500);
-     myY = (int)(Math.random()*500);
-     myC = color(0,0,137,220);
-     b1 = 1;
-     b2 = 3;
-     click = true; 
-   }
-   void mouseClicked()
-   {
-     click = false;
+     myX = (int)(Math.random()*400);
+     myY = (int)(Math.random()*400);
+     myC1 = color(219,250,252,220);
+     myC2 = color(204,250,189,220);
+     myC3 = color(252,222,252,220);
    }
    void walk()
    {
-     if (click == true)
+     if (b1 > myX)
+       myX = myX + (int)(Math.random()*5)-1;
+     else
+       myX = myX + (int)(Math.random()*5)-3;
+     if (b2 > myY)
+       myY = myY + (int)(Math.random()*5)-1;
+     else
+       myY = myY + (int)(Math.random()*5)-3;
+     if (b1 == myX && b2 == myY)
      {
-     if (mouseX > myX)
-       myX = myX + (int)(Math.random()*5)-b1;
-     else
-       myX = myX + (int)(Math.random()*5)-b2;
-     if (mouseY > myY)
-       myY = myY + (int)(Math.random()*5)-b1;
-     else
-       myY = myY + (int)(Math.random()*5)-b2;
-     } 
-     else
-     {
-        if (mouseX > myX)
-           myX = myX + (int)(Math.random()*5)-b2;
-        else
-           myX = myX + (int)(Math.random()*5)-b1;
-        if (mouseY > myY)
-           myY = myY + (int)(Math.random()*5)-b2;
-        else
-           myY = myY + (int)(Math.random()*5)-b1;
+        for (int z=1; z < 100; z++)
+        {
+           myC1 = myC2 = myC3 = color(0);
+           ellipse(b1,b2,z+5,z+5);
+        }
      }
    }
    void show()
    {
-     strokeWeight(0.5);
-     fill(myC);
+     noStroke();
+     if (Math.random() < 0.33)
+       fill(myC1);
+     else if (Math.random() > 0.66)
+       fill(myC2);
+     else 
+       fill(myC3);
      ellipse(myX, myY, 10,10);
    }
-}    
-void bg()
-{
-  fill(100); 
-  rect(0,450,500,50);
-  fill(#F4F51B);
-  for (int z=0; z < 501; z+=80)
-  {
-    rect(z,470,50,10);
-  }
-  fill(100);
-  rect(0,300,50,150);
 }
