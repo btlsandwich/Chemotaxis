@@ -1,11 +1,11 @@
 Bacteria[] Bardiel; 
-//PImage img = "";
-int b1, b2;
+int b1, b2, r;
 void setup()   
  {    
    size(400,400);
    b1 = (int)(Math.random()*400);
    b2 = (int)(Math.random()*400);
+   r = 0;
    Bardiel = new Bacteria[100];
    for(int i = 0; i < 100; i++)
    {
@@ -43,14 +43,18 @@ class Bacteria
        myY = myY + (int)(Math.random()*5)-1;
      else
        myY = myY + (int)(Math.random()*5)-3;
-     if (b1 == myX && b2 == myY)
-     {
-        for (int z=1; z < 100; z++)
-        {
-           myC1 = myC2 = myC3 = color(0);
-           ellipse(b1,b2,z+5,z+5);
-        }
-     }
+     if (dist(myX,myY,b1,b2) == 0) {
+       for (int i=255; i>0; i--)
+       { 
+          noStroke();
+          fill(230-i,0,230-i);
+          ellipse(b1, b2, i, i);
+       }
+       for (int z=0; z<100; z++)
+       {
+          myC1 = myC2 = myC3 = 0;
+       }
+       }
    }
    void show()
    {
